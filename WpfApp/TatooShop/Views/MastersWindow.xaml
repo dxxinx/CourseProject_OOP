@@ -1,0 +1,474 @@
+﻿<Window x:Class="TatooShop.Views.MastersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:TatooShop.ViewModels"
+        Title="Портфолио мастеров - Ink&amp;Skin" Icon="/image/logo.ico" Height="860" Width="1320" MinHeight="860" MinWidth="1320" WindowState="Maximized">
+
+    <Window.DataContext>
+        <vm:MastersViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style x:Key="NoMastersTextStyle" TargetType="Border">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HasNoMasters}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MasterPlaceholderStyle" TargetType="Border">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HasSelectedMaster}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MasterProfileStyle" TargetType="ScrollViewer">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HasSelectedMaster}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MasterListItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="0 0 0 14"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="ItemBorder"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                BorderThickness="1"
+                                CornerRadius="12">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ItemBorder" Property="BorderBrush" Value="#6B3C84"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ItemBorder" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#21112D"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource CanvasBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Margin="40 30 40 0" Padding="20 14"
+                Background="{StaticResource PanelBrush}"
+                BorderBrush="{StaticResource LineBrush}"
+                BorderThickness="1"
+                CornerRadius="12">
+            <DockPanel LastChildFill="False">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" DockPanel.Dock="Left">
+                    <Image Source="/image/logo48x48.png" Width="30" Height="30" Margin="0 0 14 0"/>
+                    <StackPanel>
+                        <TextBlock Text="Ink&amp;Skin" Foreground="White" FontSize="18" FontWeight="ExtraBold"/>
+                        <TextBlock Text="команда мастеров" Foreground="{StaticResource MutedBrush}" FontSize="12"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Menu Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
+                    <MenuItem Header="Главная" Command="{Binding StartCommand}" Style="{StaticResource MenuClick}"/>
+                    <MenuItem Header="Каталог эскизов" Command="{Binding SketchCommand}" Style="{StaticResource MenuClick}"/>
+                    <MenuItem Header="Наши мастера" Style="{StaticResource MenuClick}" BorderBrush="{StaticResource AccentBrush}" BorderThickness="0 0 0 2"/>
+                    <MenuItem Header="Избранное" Click="Favorite_Window_Click" Style="{StaticResource MenuClick}"/>
+                    <MenuItem Header="Личный кабинет" Click="Personal_Window_Click" Style="{StaticResource MenuClick}"/>
+                    <MenuItem Header="Выйти" Click="Logout_Click" Style="{StaticResource MenuClick}" Foreground="#FF6B6B"/>
+                </Menu>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="40 28 40 24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="420"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock FontSize="38" FontWeight="ExtraBold">
+                    <Run Foreground="White" Text="ПОРТФОЛИО "/>
+                    <Run Foreground="{StaticResource AccentBrush}" Text="МАСТЕРОВ"/>
+                </TextBlock>
+                <TextBlock Text="Выберите специалиста, посмотрите работы и отзывы клиентов"
+                           Foreground="{StaticResource MutedBrush}"
+                           FontSize="16"
+                           Margin="0 8 0 0"/>
+            </StackPanel>
+
+            <Grid Grid.Column="1" VerticalAlignment="Center">
+                <TextBox Height="46"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource CustomTextBoxStyle}"
+                         Padding="46 0 15 0"/>
+                <Image Source="/image/search-icon.png"
+                       Width="20"
+                       Height="20"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="16 0 0 0"
+                       Opacity="0.58"
+                       IsHitTestVisible="False"/>
+                <TextBlock Text="Поиск по имени или стилю"
+                           Foreground="{StaticResource MutedBrush}"
+                           IsHitTestVisible="False"
+                           VerticalAlignment="Center"
+                           Margin="46 0 0 0">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SearchText}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="40 0 40 30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="380"/>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Background="{StaticResource PanelBrush}"
+                    BorderBrush="{StaticResource LineBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="18">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Margin="0 0 0 16">
+                        <TextBlock Text="Мастера" Foreground="White" FontSize="22" FontWeight="Bold" DockPanel.Dock="Left"/>
+                        <TextBlock Text="{Binding MasterDataGrid.Count, StringFormat={}{0} в списке}"
+                                   Foreground="{StaticResource MutedBrush}"
+                                   FontSize="13"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"/>
+                    </DockPanel>
+
+                    <Grid Grid.Row="1">
+                        <Border Style="{StaticResource NoMastersTextStyle}"
+                                Background="#0D0912"
+                                BorderBrush="{StaticResource LineBrush}"
+                                BorderThickness="1"
+                                CornerRadius="12"
+                                Padding="24">
+                            <TextBlock Text="{Binding EmptySearchMessage}"
+                                       Foreground="{StaticResource MutedBrush}"
+                                       FontSize="18"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Center"/>
+                        </Border>
+
+                        <ScrollViewer x:Name="MasterListScrollViewer"
+                                      VerticalScrollBarVisibility="Auto"
+                                      Padding="0 0 8 0"
+                                      PreviewMouseWheel="MasterListScrollViewer_PreviewMouseWheel">
+                            <ListBox Background="Transparent"
+                                     BorderThickness="0"
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                     ItemsSource="{Binding MasterDataGrid}"
+                                     SelectedItem="{Binding SelectedMaster}"
+                                     ItemContainerStyle="{StaticResource MasterListItemStyle}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="16"
+                                                Background="#0D0912"
+                                                BorderBrush="{StaticResource LineBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="12">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="78"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Border Width="68"
+                                                        Height="68"
+                                                        CornerRadius="34"
+                                                        ClipToBounds="True"
+                                                        BorderBrush="{StaticResource LineBrush}"
+                                                        BorderThickness="1">
+                                                    <Image Source="{Binding ImageSource}" Stretch="UniformToFill"/>
+                                                </Border>
+
+                                                <StackPanel Grid.Column="1" Margin="14 0 0 0" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding ShortFullName}" Foreground="White" FontSize="18" FontWeight="Bold" TextWrapping="Wrap"/>
+                                                    <TextBlock Text="{Binding Specialization, StringFormat='Стиль: {0}'}" Foreground="{StaticResource AccentBrush}" Margin="0 6 0 0"/>
+                                                    <TextBlock Text="{Binding FullExperience}" Foreground="{StaticResource MutedBrush}" FontSize="13" Margin="0 3 0 0"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Column="2">
+                <Border Style="{StaticResource MasterPlaceholderStyle}"
+                        CornerRadius="12"
+                        Background="{StaticResource PanelBrush}"
+                        BorderBrush="{StaticResource LineBrush}"
+                        BorderThickness="1"
+                        Padding="40">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Выберите мастера"
+                                   Foreground="White"
+                                   FontSize="30"
+                                   FontWeight="ExtraBold"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Профиль, портфолио и отзывы появятся здесь."
+                                   Foreground="{StaticResource MutedBrush}"
+                                   FontSize="17"
+                                   Margin="0 10 0 0"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
+                                   MaxWidth="420"/>
+                    </StackPanel>
+                </Border>
+
+                <ScrollViewer Style="{StaticResource MasterProfileStyle}" VerticalScrollBarVisibility="Auto" Padding="0 0 12 0">
+                    <StackPanel>
+                        <Border Background="{StaticResource PanelBrush}"
+                                BorderBrush="{StaticResource LineBrush}"
+                                BorderThickness="1"
+                                CornerRadius="12"
+                                Padding="28"
+                                Margin="0 0 0 24">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="210"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="260"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Width="178"
+                                        Height="178"
+                                        CornerRadius="89"
+                                        ClipToBounds="True"
+                                        BorderBrush="{StaticResource AccentBrush}"
+                                        BorderThickness="2"
+                                        HorizontalAlignment="Left">
+                                    <Image Source="{Binding SelectedMaster.ImageSource}" Stretch="UniformToFill"/>
+                                </Border>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding SelectedMaster.FullName}" Foreground="White" FontSize="32" FontWeight="ExtraBold" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding SelectedMaster.FullType}" Foreground="{StaticResource AccentBrush}" FontSize="19" Margin="0 10 0 0"/>
+                                    <TextBlock Text="{Binding SelectedMaster.FullExperience}" Foreground="{StaticResource MutedBrush}" FontSize="17" Margin="0 6 0 0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                    <Border Background="#0D0912"
+                                            BorderBrush="{StaticResource LineBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="12"
+                                            Padding="18"
+                                            Margin="0 0 0 14">
+                                        <StackPanel>
+                                            <TextBlock Text="Работ в портфолио" Foreground="{StaticResource MutedBrush}" FontSize="12"/>
+                                            <TextBlock Text="{Binding PortfolioSketches.Count}" Foreground="White" FontSize="28" FontWeight="ExtraBold"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Button Height="48"
+                                            Command="{StaticResource ReservMasterCommand}"
+                                            CommandParameter="{Binding SelectedMaster}"
+                                            Content="Записаться"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Grid Margin="0 0 0 24">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Работы мастера" Foreground="White" FontSize="26" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding PortfolioSketches.Count, StringFormat={}{0} работ}"
+                                       Foreground="{StaticResource MutedBrush}"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <TextBlock Text="У этого мастера пока нет загруженных работ."
+                                   Foreground="{StaticResource MutedBrush}"
+                                   Margin="0 0 0 24">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding PortfolioSketches.Count}" Value="0">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <ItemsControl ItemsSource="{Binding PortfolioSketches}" Margin="0 0 0 28">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Width="190"
+                                            Height="210"
+                                            Margin="0 0 16 16"
+                                            CornerRadius="12"
+                                            ClipToBounds="True"
+                                            BorderBrush="{StaticResource LineBrush}"
+                                            BorderThickness="1"
+                                            Background="{StaticResource PanelBrush}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Image Source="{Binding ImageSource}" Stretch="UniformToFill"/>
+                                            <Button Grid.Row="1"
+                                                    Content="Посмотреть"
+                                                    Background="#0D0912"
+                                                    BorderBrush="{StaticResource LineBrush}"
+                                                    Command="{Binding DataContext.OpenPortfolioPreviewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    CommandParameter="{Binding}"
+                                                    Margin="0"
+                                                    BorderThickness="1 1 1 0"
+                                                    Padding="10"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="360"/>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0"
+                                    Background="{StaticResource PanelBrush}"
+                                    BorderBrush="{StaticResource LineBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="12"
+                                    Padding="22">
+                                <StackPanel>
+                                    <TextBlock Text="Оставить отзыв" Foreground="White" FontSize="23" FontWeight="Bold" Margin="0 0 0 18"/>
+                                    <TextBlock Text="Ваша оценка" Foreground="{StaticResource MutedBrush}" Margin="0 0 0 8"/>
+                                    <ComboBox SelectedValue="{Binding UserRating}" SelectedValuePath="Tag" Height="42" Margin="0 0 0 16">
+                                        <ComboBoxItem Content="5 - Отлично" Tag="5"/>
+                                        <ComboBoxItem Content="4 - Хорошо" Tag="4"/>
+                                        <ComboBoxItem Content="3 - Нормально" Tag="3"/>
+                                        <ComboBoxItem Content="2 - Плохо" Tag="2"/>
+                                        <ComboBoxItem Content="1 - Ужасно" Tag="1"/>
+                                    </ComboBox>
+
+                                    <TextBlock Text="Комментарий" Foreground="{StaticResource MutedBrush}" Margin="0 0 0 8"/>
+                                    <TextBox Height="112"
+                                             Text="{Binding UserComment, UpdateSourceTrigger=PropertyChanged}"
+                                             Style="{StaticResource CustomTextBoxStyle}"
+                                             AcceptsReturn="True"
+                                             TextWrapping="Wrap"
+                                             Margin="0 0 0 18"/>
+
+                                    <Button Height="46" Command="{Binding ReviewCommand}" Content="Отправить отзыв"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Column="2"
+                                    Background="{StaticResource PanelBrush}"
+                                    BorderBrush="{StaticResource LineBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="12"
+                                    Padding="22">
+                                <StackPanel>
+                                    <DockPanel Margin="0 0 0 18">
+                                        <TextBlock Text="Отзывы" Foreground="White" FontSize="23" FontWeight="Bold" DockPanel.Dock="Left"/>
+                                        <TextBlock Text="{Binding UserFeedback.Count, StringFormat={}{0} всего}"
+                                                   Foreground="{StaticResource MutedBrush}"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center"/>
+                                    </DockPanel>
+
+                                    <TextBlock Text="Отзывов пока нет. Будьте первым!"
+                                               Foreground="{StaticResource MutedBrush}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding UserFeedback.Count}" Value="0">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                    <ItemsControl ItemsSource="{Binding UserFeedback}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Margin="0 0 0 14"
+                                                        Background="#0D0912"
+                                                        BorderBrush="{StaticResource LineBrush}"
+                                                        BorderThickness="1"
+                                                        Padding="18"
+                                                        CornerRadius="12">
+                                                    <StackPanel>
+                                                        <DockPanel>
+                                                            <TextBlock Text="{Binding User.Login}" Foreground="White" FontWeight="Bold" FontSize="17" DockPanel.Dock="Left"/>
+                                                            <TextBlock Text="{Binding CreatedAt, StringFormat={}{0:dd.MM.yyyy HH:mm}}" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right"/>
+                                                        </DockPanel>
+                                                        <TextBlock Text="{Binding Rating, StringFormat='Оценка: {0} / 5'}" Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold" Margin="0 8 0 0"/>
+                                                        <TextBlock Text="{Binding Comment}" Foreground="White" TextWrapping="Wrap" Margin="0 10 0 0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

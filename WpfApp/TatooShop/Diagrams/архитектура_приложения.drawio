@@ -1,0 +1,104 @@
+<mxfile host="app.diagrams.net" agent="Codex">
+  <diagram id="tatooshop-architecture-clean" name="Архитектура приложения">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="0" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Архитектура приложения TatooShop" style="text;html=1;strokeColor=none;fillColor=none;fontSize=28;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="390" y="30" width="820" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="platform" value=".NET 8 WPF Windows Desktop" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="100" width="1440" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="views-layer" value="Presentation Layer&lt;br&gt;&lt;b&gt;Views (XAML)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#000000;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="220" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="views-list" value="StartWindow&lt;br&gt;LogWindow, RegistrationWindow&lt;br&gt;SketchWindow, MastersWindow&lt;br&gt;ReservationWindow&lt;br&gt;FavoriteWindow, PersonalWindow&lt;br&gt;AdminWindow&lt;br&gt;ImagePreviewWindow" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;align=left;spacingLeft=12;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="260" height="210" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vm-layer" value="Application Layer&lt;br&gt;&lt;b&gt;ViewModels + Commands&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#000000;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="450" y="220" width="280" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vm-list" value="ViewModel : INotifyPropertyChanged&lt;br&gt;StartViewModel&lt;br&gt;LogViewModel&lt;br&gt;RegistrationViewModel&lt;br&gt;SketchViewModel&lt;br&gt;MastersViewModel&lt;br&gt;ReservationViewModel&lt;br&gt;FavoriteViewModel&lt;br&gt;PersonalViewModel&lt;br&gt;AdminViewModel&lt;br&gt;RelayCommand, Delete*, FavoriteCommand" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;align=left;spacingLeft=12;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="450" y="320" width="280" height="270" as="geometry" />
+        </mxCell>
+
+        <mxCell id="service-layer" value="Service Layer&lt;br&gt;&lt;b&gt;Business / Infrastructure Services&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#000000;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="850" y="220" width="290" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="service-list" value="Manager&lt;br&gt;DataConnection&lt;br&gt;SessionNavigationService&lt;br&gt;NotificationService&lt;br&gt;Validator&lt;br&gt;EmailMessage&lt;br&gt;ImageSourceHelper&lt;br&gt;ForConvert / ForImage" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;align=left;spacingLeft=12;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="850" y="320" width="290" height="220" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db-layer" value="Data Storage" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#000000;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="220" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="db-cylinder" value="SQL Server SQLEXPRESS&lt;br&gt;TattooShopProject" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=18;fillColor=#ffffff;strokeColor=#000000;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="320" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="db-schema" value="schema.sql" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="490" width="200" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="db-tables" value="Accounts&lt;br&gt;Masters&lt;br&gt;Sketches&lt;br&gt;Reservations&lt;br&gt;Feedbacks&lt;br&gt;Favourites&lt;br&gt;SupportRequests&lt;br&gt;InternalNotifications" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;align=left;spacingLeft=14;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="570" width="200" height="210" as="geometry" />
+        </mxCell>
+
+        <mxCell id="models-layer" value="Domain Models" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#000000;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="450" y="690" width="690" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="models-list" value="Acc, User, Admin | Master, Sketch | Reservation, Favourite, Feedback | SupportRequest, InternalNotification" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="450" y="780" width="690" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="resources" value="Resources&lt;br&gt;Style.xaml, image/*, Fonts/*" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="690" width="260" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge-views-vm" value="Binding / DataContext" style="endArrow=block;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=13;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="450" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-vm-services" value="ICommand calls" style="endArrow=block;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=13;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="730" y="260" as="sourcePoint" />
+            <mxPoint x="850" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-services-db" value="ADO.NET / SQL queries" style="endArrow=block;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=13;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="260" as="sourcePoint" />
+            <mxPoint x="1260" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-services-models" value="uses" style="endArrow=block;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=13;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="995" y="540" as="sourcePoint" />
+            <mxPoint x="995" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-models-db" value="stored in tables" style="endArrow=open;dashed=1;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=13;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="815" as="sourcePoint" />
+            <mxPoint x="1290" y="675" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1215" y="815" />
+              <mxPoint x="1215" y="675" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-resources-views" value="styles/assets" style="endArrow=open;dashed=1;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=13;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="690" as="sourcePoint" />
+            <mxPoint x="210" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

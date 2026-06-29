@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TatooShop.Models.Acc">
+    <Position X="2.75" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAIAAAAAAAIAAAAAQAAQABCAAAABCAAAQIAAAAAA=</HashCode>
+      <FileName>Models\Acc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TatooShop.Models.Admin">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TatooShop.Models.Feedback">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAEAAAAAACAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Feedback.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TatooShop.Models.Master">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAAAAAAAAAIAAAAAQAAQABAAAABAAEQAAAAAAQAA=</HashCode>
+      <FileName>Models\Master.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TatooShop.Models.Reservation">
+    <Position X="5.5" Y="5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAIACAAAAAAAAAAAAAAAABAAAAAAgAAQA=</HashCode>
+      <FileName>Models\Reservation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TatooShop.Models.Sketch">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAgAAAAAAAAAAAAAAAAAAAAAAABAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Sketch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TatooShop.Models.User">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCAACAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="TatooShop.Models.AccountType">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Acc.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TatooShop.Models.AdminType">
+    <Position X="14.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAACA=</HashCode>
+      <FileName>Models\Admin.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TatooShop.Models.UserTime">
+    <Position X="12.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Reservation.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TatooShop.Models.TatooTypes">
+    <Position X="10.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAEgAAAAAgAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Sketch.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

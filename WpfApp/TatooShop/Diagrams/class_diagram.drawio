@@ -1,0 +1,138 @@
+<mxfile host="app.diagrams.net" agent="Codex">
+  <diagram id="tatooshop-class-fixed" name="Диаграмма классов">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="0" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Диаграмма классов приложения TatooShop" style="text;html=1;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="420" y="30" width="960" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acc" value="&lt;b&gt;&amp;lt;&amp;lt;abstract&amp;gt;&amp;gt; Acc&lt;/b&gt;&lt;hr&gt;+ Id: int&lt;br&gt;+ AccountType: AccountType&lt;br&gt;+ Login: string&lt;br&gt;+ Password: string&lt;br&gt;+ EMail: string&lt;br&gt;+ Phone: string&lt;br&gt;+ Surname: string&lt;br&gt;+ Name: string&lt;br&gt;+ MiddleName: string&lt;br&gt;+ FullName: string&lt;hr&gt;+ ForSearch(): string" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="140" width="310" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="&lt;b&gt;User&lt;/b&gt;&lt;hr&gt;+ Address: string&lt;hr&gt;+ ForSearch(): string" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="560" width="230" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" value="&lt;b&gt;Admin&lt;/b&gt;&lt;hr&gt;наследует Acc&lt;hr&gt;" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="360" y="560" width="220" height="125" as="geometry" />
+        </mxCell>
+
+        <mxCell id="master" value="&lt;b&gt;Master&lt;/b&gt;&lt;hr&gt;+ Id: int&lt;br&gt;+ Image: byte[]&lt;br&gt;+ Surname: string&lt;br&gt;+ Name: string&lt;br&gt;+ MiddleName: string&lt;br&gt;+ Type: TatooTypes&lt;br&gt;+ Experience: int&lt;br&gt;+ FullName: string&lt;br&gt;+ Specialization: string&lt;br&gt;+ ImageSource: ImageSource?&lt;hr&gt;+ ForSearch(): string&lt;br&gt;+ ToString(): string" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="610" y="140" width="310" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="sketch" value="&lt;b&gt;Sketch&lt;/b&gt;&lt;hr&gt;+ Id: int&lt;br&gt;+ Type: TatooTypes&lt;br&gt;+ Placement: TattooPlacement&lt;br&gt;+ Size: TattooSize&lt;br&gt;+ Complexity: TattooComplexity&lt;br&gt;+ EstimatedHours: int&lt;br&gt;+ Image: byte[]&lt;br&gt;+ Master: Master?&lt;br&gt;+ AuthorName: string&lt;br&gt;+ IsFavorite: bool&lt;hr&gt;+ StyleLabel: string&lt;br&gt;+ PlacementLabel: string&lt;br&gt;+ SizeLabel: string" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="610" y="600" width="330" height="350" as="geometry" />
+        </mxCell>
+
+        <mxCell id="reservation" value="&lt;b&gt;Reservation&lt;/b&gt;&lt;hr&gt;+ Id: int&lt;br&gt;+ User: User&lt;br&gt;+ Master: Master&lt;br&gt;+ Date: DateTime&lt;br&gt;+ Time: UserTime&lt;br&gt;+ Status: ReservationStatus&lt;br&gt;+ StatusText: string&lt;br&gt;+ CanCancel: bool&lt;br&gt;+ TimeText: string&lt;hr&gt;+ GetHour(time): string&lt;br&gt;+ ParseHour(hour): UserTime&lt;br&gt;+ GetReservationDateTime(): DateTime" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="120" width="360" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="favourite" value="&lt;b&gt;Favourite&lt;/b&gt;&lt;hr&gt;+ Id: int&lt;br&gt;+ User: User&lt;br&gt;+ Sketch: Sketch&lt;hr&gt;" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="520" width="250" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="feedback" value="&lt;b&gt;Feedback&lt;/b&gt;&lt;hr&gt;+ Id: int&lt;br&gt;+ User: User&lt;br&gt;+ Master: Master&lt;br&gt;+ Rating: int&lt;br&gt;+ Comment: string&lt;br&gt;+ CreatedAt: DateTime&lt;hr&gt;" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="120" width="260" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="support" value="&lt;b&gt;SupportRequest&lt;/b&gt;&lt;hr&gt;+ Id: int&lt;br&gt;+ User: User&lt;br&gt;+ Subject: string&lt;br&gt;+ Message: string&lt;br&gt;+ AdminReply: string&lt;br&gt;+ CreatedAt: DateTime&lt;br&gt;+ ProcessedAt: DateTime?&lt;br&gt;+ IsProcessed: bool&lt;hr&gt;" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="400" width="260" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="notification" value="&lt;b&gt;InternalNotification&lt;/b&gt;&lt;hr&gt;+ Id: int&lt;br&gt;+ User: User&lt;br&gt;+ Title: string&lt;br&gt;+ Message: string&lt;br&gt;+ CreatedAt: DateTime&lt;br&gt;+ IsRead: bool&lt;hr&gt;" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="735" width="260" height="220" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dataconnection" value="&lt;b&gt;DataConnection&lt;/b&gt;&lt;hr&gt;+ Accounts: List&amp;lt;Acc&amp;gt;&lt;br&gt;+ Masters: List&amp;lt;Master&amp;gt;&lt;br&gt;+ Sketch: List&amp;lt;Sketch&amp;gt;&lt;br&gt;+ Reservations: List&amp;lt;Reservation&amp;gt;&lt;br&gt;+ Feedbacks: List&amp;lt;Feedback&amp;gt;&lt;br&gt;+ Favourites: List&amp;lt;Favourite&amp;gt;&lt;hr&gt;+ GetInstance(): DataConnection&lt;br&gt;+ SaveChanges(): int" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#f8f9fa;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="820" width="330" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="manager" value="&lt;b&gt;Manager&lt;/b&gt;&lt;hr&gt;+ CurrentUser: Acc&lt;br&gt;+ AccountType: AccountType&lt;hr&gt;+ Login(login, password): bool&lt;br&gt;+ Register(...): (bool, string)&lt;br&gt;+ HashPassword(password): string&lt;br&gt;+ Logout(): void" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#f8f9fa;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="480" y="1010" width="340" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="command" value="&lt;b&gt;&amp;lt;&amp;lt;abstract&amp;gt;&amp;gt; Command&lt;/b&gt;&lt;hr&gt;+ CanExecuteChanged: event&lt;hr&gt;+ CanExecute(parameter): bool&lt;br&gt;+ Execute(parameter): void" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#f8f9fa;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="930" y="1000" width="300" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="relay" value="&lt;b&gt;RelayCommand&lt;/b&gt;&lt;hr&gt;- _execute: Action&amp;lt;object&amp;gt;&lt;br&gt;- _canExecute: Func&amp;lt;object,bool&amp;gt;&lt;hr&gt;+ Execute(parameter): void" style="swimlane;html=1;whiteSpace=wrap;rounded=0;startSize=32;fillColor=#f8f9fa;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="1000" width="310" height="155" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge-user-acc" value="" style="endArrow=block;endFill=0;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="195" y="560" as="sourcePoint" />
+            <mxPoint x="195" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-admin-acc" value="" style="endArrow=block;endFill=0;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="560" as="sourcePoint" />
+            <mxPoint x="410" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-sketch-master" value="0..* / 0..1" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="775" y="600" as="sourcePoint" />
+            <mxPoint x="775" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-res-user" value="User" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1040" y="200" as="sourcePoint" />
+            <mxPoint x="410" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-res-master" value="Master" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1040" y="330" as="sourcePoint" />
+            <mxPoint x="920" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-fav-sketch" value="Sketch" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1060" y="595" as="sourcePoint" />
+            <mxPoint x="940" y="595" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-fav-user" value="User" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1060" y="660" as="sourcePoint" />
+            <mxPoint x="310" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-feedback-master" value="Master" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1460" y="230" as="sourcePoint" />
+            <mxPoint x="920" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-feedback-user" value="User" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1460" y="300" as="sourcePoint" />
+            <mxPoint x="410" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-support-user" value="User" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1460" y="530" as="sourcePoint" />
+            <mxPoint x="310" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-notification-user" value="User" style="endArrow=open;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1460" y="840" as="sourcePoint" />
+            <mxPoint x="310" y="705" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-manager-db" value="использует" style="endArrow=open;dashed=1;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="1060" as="sourcePoint" />
+            <mxPoint x="410" y="1030" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-relay-command" value="" style="endArrow=block;endFill=0;html=1;strokeWidth=2;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1360" y="1075" as="sourcePoint" />
+            <mxPoint x="1230" y="1075" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,45 @@
+﻿<Window x:Class="TatooShop.View.LogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:TatooShop.ViewModels"
+        Title="Вход в Ink&amp;Skin" Icon="/image/logo.ico" Height="600" Width="840" MinHeight="600" MinWidth="840" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <vm:LogViewModel/>
+    </Window.DataContext>
+    <Grid Background="{StaticResource CanvasBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.85*"/>
+            <ColumnDefinition Width="1.15*"/>
+        </Grid.ColumnDefinitions>
+        <Border Margin="20" CornerRadius="12" ClipToBounds="True">
+            <Grid>
+                <Image Source="/image/ChatGPT Image 13 мая 2026 г., 00_04_24.png" Stretch="UniformToFill"/>
+                <Border Background="#5506030A"/>
+                <StackPanel VerticalAlignment="Bottom" Margin="26">
+                    <Image Source="./image/logo1.png" Width="105" HorizontalAlignment="Left" Margin="0 0 0 16"/>
+                    <TextBlock Text="Вдохновляйтесь" Foreground="White" FontSize="23" FontWeight="Bold" TextWrapping="NoWrap"/>
+                    <TextBlock Text="Ваша кожа станет холстом для мечты." Foreground="{StaticResource MutedBrush}" Margin="0 10 0 0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="40">
+            <TextBlock Text="Авторизация" Foreground="White" FontSize="32" FontWeight="Bold" Margin="0 0 0 8"/>
+            <TextBlock Text="Введите данные для доступа в кабинет" Foreground="{StaticResource MutedBrush}" Margin="0 0 0 30"/>
+            <TextBlock Text="Логин" Foreground="{StaticResource MutedBrush}" FontWeight="SemiBold" Margin="0 0 0 8"/>
+            <TextBox Text="{Binding Login}" FontSize="16" Style="{StaticResource CustomTextBoxStyle}" Margin="0 0 0 20"/>
+            <TextBlock Text="Пароль" Foreground="{StaticResource MutedBrush}" FontWeight="SemiBold" Margin="0 0 0 8"/>
+            <PasswordBox x:Name="Password" Height="44" BorderThickness="1" BorderBrush="{StaticResource LineBrush}" 
+                         Background="#0D0912" Foreground="White" FontSize="16" Padding="14 8">
+                <!-- Заглушка для PasswordBox, так как Style не применяется для свойств пароля -->
+            </PasswordBox>
+            <Button Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password}" 
+                    Content="Войти в систему" Height="48" Margin="0 30 0 0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                <TextBlock Text="Еще нет аккаунта?" Foreground="{StaticResource MutedBrush}"/>
+                <TextBlock Text=" Зарегистрироваться" Foreground="{StaticResource AccentBrush}" FontWeight="Bold" 
+                           Cursor="Hand" MouseDown="Create_Account" Margin="5 0 0 0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
